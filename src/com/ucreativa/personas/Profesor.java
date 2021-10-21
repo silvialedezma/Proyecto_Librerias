@@ -6,6 +6,7 @@
 package com.ucreativa.personas;
 
 import com.ucreativa.universidad.Carrera;
+import java.util.Arrays;
 
 /**
  *
@@ -14,7 +15,7 @@ import com.ucreativa.universidad.Carrera;
 public class Profesor extends Persona {
 
     private String idEmpleado = "";
-    private Carrera carreras[] = null;  //crear clase carrera
+    private Carrera[] carreras = null;  //crear clase carrera
 
     public Profesor() {
     }
@@ -47,10 +48,11 @@ public class Profesor extends Persona {
         this.carreras = carreras;
     }
 
+    @Override
     public String toString() {//revisar
         return "Profesor{"
                 + "idEmpleado='" + idEmpleado + '\''
-                + ", carreras='" + carreras + '\''
+                + ", carreras='" + Arrays.toString(carreras) + '\''
                 + '}';
     }
 }

@@ -4,14 +4,13 @@
  * and open the template in the editor.
  */
 package com.ucreativa.universidad;
-
 import com.ucreativa.personas.Profesor;
 
 /**
  *
  * @author verog
  */
-public class Carrera extends Profesor {
+public class Carrera {
 
     private String nombre = "";
     private Profesor director = new Profesor();

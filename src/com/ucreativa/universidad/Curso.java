@@ -4,48 +4,43 @@
  * and open the template in the editor.
  */
 package com.ucreativa.universidad;
-import com.ucreativa.personas.*;
-import com.ucreativa.universidad.*;
-import java.util.Scanner;
 import com.ucreativa.personas.Profesor;
+
 
 /**
  *
  * @author verog
  */
-public class Curso extends Carrera {
+public class Curso{
 
-    private String nombre = "";
-    private Carrera carrera = new Carrera();
+    private String nombreCurso = "";
+    private Carrera carrera;
     private int creditos = 0;
-    private Profesor profesor = new Profesor();
+    private Profesor profesor;
+    private int Cod=0;
 
     public Curso() {
-  
     }
-
-    public Curso(String nombre, Profesor profesor) {
-        this.nombre=nombre;
-        this.profesor=profesor;
+    
+    //constructor todos los parametros nombrecurso,carrera carrera, creditos, profesor profesor
+    public Curso(String nombreCurso, Carrera carrera, int creditos, Profesor profesor) {
+        this.nombreCurso = nombreCurso;
+        this.carrera = carrera;
+        this.creditos = creditos;
+        this.profesor = profesor;
     }
-
-    public Curso(String nombre, String director) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
     /**
      * @return the nombre
      */
     public String getNombre() {
-        return this.nombre;
+        return this.nombreCurso;
     }
 
     /**
      * @param nombre the nombre to set
      */
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombreCurso = nombre;
     }
 
     /**
@@ -90,12 +85,11 @@ public class Curso extends Carrera {
         this.profesor = profesor;
     }
 
-    public String toString() {//revisar
-        return "Curso{"
-                + "nombre='" + nombre + '\''
-                + ", carrera='" + carrera + '\''
+    @Override
+    public String toString() {
+        return "{"
+                + "nombre='" + nombreCurso + '\''
                 + ", creditos='" + creditos + '\''
-                + ", profesor='" + profesor + '\''
                 + '}';
     }
     

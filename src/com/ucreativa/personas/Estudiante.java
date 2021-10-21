@@ -7,6 +7,7 @@ package com.ucreativa.personas;
 
 import com.ucreativa.universidad.Carrera;
 import com.ucreativa.universidad.Curso;
+import java.util.Arrays;
 
 /**
  *
@@ -14,25 +15,26 @@ import com.ucreativa.universidad.Curso;
  */
 public class Estudiante extends Persona {
 
-    private String carne = "";
-    private Carrera carrera[] = null;
-    private Curso curso[] = null;
+    private String carnet = "";
+    private Carrera[] carrera = null;
+    private Curso[] curso = null;
+    
 
     public Estudiante() {
     }
 
     /**
-     * @return the carne
+     * @return the carnet
      */
-    public String getCarne() {
-        return this.carne;
+    public String getCarnet() {
+        return this.carnet;
     }
 
     /**
-     * @param carne the carne to set
+     * @param carne the carnet to set
      */
-    public void setCarne(String carne) {
-        this.carne = carne;
+    public void setCarnet(String carne) {
+        this.carnet = carne;
     }
 
     /**
@@ -63,11 +65,12 @@ public class Estudiante extends Persona {
         this.curso = cursos;
     }
 
+    @Override
     public String toString() {//revisar
         return "Estudiante{"
-                + "carne='" + carne + '\''
-                + ", carrera='" + carrera + '\''
-                + ", curso='" + curso + '\''
+                + "carne='" + carnet + '\''
+                + ", carrera='" + Arrays.toString(carrera) + '\''
+                + ", curso='" + Arrays.toString(curso) + '\''
                 + '}';
     }
 

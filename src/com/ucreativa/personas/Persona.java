@@ -16,6 +16,7 @@ public abstract class Persona {
     protected String nombre = "";
     protected Date fechaNacimiento = null;
 
+    
     public Persona() {
     }
 
