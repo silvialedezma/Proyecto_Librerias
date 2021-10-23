@@ -7,7 +7,7 @@ import com.ucreativa.personas.*;
  */
 public class Mantenimientos {
 
-    public static void agregar(Persona[] persona, Persona registro) {
+    public static void agregarPersona(Persona[] persona, Persona registro) {
         for (int i = 0; i < persona.length; i++) {
             if (persona[i] == null) {
                 persona[i] = registro;
@@ -19,7 +19,7 @@ public class Mantenimientos {
         }
     }
 
-    public static void eliminar(Persona[] persona, Persona registro) {
+    public static void eliminarPersona(Persona[] persona, Persona registro) {
         boolean recordfound = true;
         for (int i = 0; i < persona.length; i++) {
             if (persona[i] != null && persona[i] == registro) {
@@ -36,7 +36,7 @@ public class Mantenimientos {
         }
     }
 
-    public static void eliminar(Persona[] persona, String identificacion) {
+    public static void eliminarPersona(Persona[] persona, String identificacion) {
         boolean recordfound = true;
         for (int i = 0; i < persona.length; i++) {
             if (persona[i] != null && (persona[i].getIdentificacion() == null ? identificacion == null : persona[i].getIdentificacion().equals(identificacion))) {
@@ -53,7 +53,7 @@ public class Mantenimientos {
         }
     }
 
-    public static void modificar(Persona[] persona, Persona registroActual, Persona registroNuevo) {
+    public static void modificarPersona(Persona[] persona, Persona registroActual, Persona registroNuevo) {
         boolean recordfound = true;
         for (int i = 0; i < persona.length; i++) {
             if (persona[i] != null && persona[i] == registroActual) {
@@ -70,7 +70,7 @@ public class Mantenimientos {
         }
     }
 
-    public static void modificar(Persona[] persona, String identificacionActual, Persona identificacionNueva) {
+    public static void modificarPersona(Persona[] persona, String identificacionActual, Persona identificacionNueva) {
         boolean recordfound = true;
         for (int i = 0; i < persona.length; i++) {
             if (persona[i] != null && (persona[i].getIdentificacion() == null ? identificacionActual == null : persona[i].getIdentificacion().equals(identificacionActual))) {
@@ -87,7 +87,7 @@ public class Mantenimientos {
         }
     }
 
-    public static Persona consultar(Persona[] persona, String identificacionActual) {
+    public static Persona consultarPersona(Persona[] persona, String identificacionActual) {
         for (Persona persona1 : persona) {
             if (persona1 != null && (persona1.getIdentificacion() == null ? identificacionActual == null : persona1.getIdentificacion().equals(identificacionActual))) {
                 return persona1;

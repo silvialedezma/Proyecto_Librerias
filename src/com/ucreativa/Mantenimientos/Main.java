@@ -20,7 +20,6 @@ public class Main {
     private Curso[] curso = new Curso[10];
     private Mantenimientos cursos = new Mantenimientos();
 
-    
     public static void main(String[] args) {
         Main inicio = new Main();
         Scanner scanner = new Scanner(System.in);
@@ -46,14 +45,14 @@ public class Main {
                     inicio.subMenuCurso();
                     break;
                 case 2:
-                   inicio.subMenuCarreras();
+                    inicio.subMenuCarreras();
                     break;
 
                 case 3:
-                  
+
                     break;
                 case 4:
-        
+
                     break;
                 case 5:
                     System.out.println("Saliendo del sistema");
@@ -109,7 +108,8 @@ public class Main {
 
         }
     }
-public void subMenuCarreras() {
+
+    public void subMenuCarreras() {
         Main inicio = new Main();
         Scanner scanner01 = new Scanner(System.in);
         boolean b = true;
@@ -150,26 +150,8 @@ public void subMenuCarreras() {
                     break;
             }
         }
-}
-    /* public void agregarEstudiante() {
-        Scanner scanner01 = new Scanner(System.in);
-        System.out.println("Ingrese la cedula");
-        try {
-            int cedula = Integer.parseInt(scanner01.nextLine());
-            System.out.println("Ingrese el nombre del curso");
-            String nombre = scanner01.nextLine();
-            System.out.println("Ingrese nombre del director");
-            String director = scanner01.nextLine();         
-            //
-            Curso nuevoCurso = new Curso();
-            Profesor profesor=new Profesor();
-            Carrera carrera=new Carrera();
-            Mantenimientos.agregarCurso(curso, nuevoCurso);
-            
-        } catch (NumberFormatException e) {
-            System.out.println("Cedula debe ser numerica");
-        }
-    }*/
+    }
+
     public void agregarCurso() {
 
         Scanner scanner01 = new Scanner(System.in);
@@ -231,14 +213,14 @@ public void subMenuCarreras() {
             Curso newCurso = new Curso();
             newCurso.setNombre(nombreCurso);
             MantenimientoCursos mantCurso = new MantenimientoCursos();
-            mantCurso.consultarCurso(curso,nombreCurso);
+            mantCurso.consultarCurso(curso, nombreCurso);
         } catch (NumberFormatException e) {
             System.out.println("Formato incorrecto, intente de nuevo");
         }
     }
-      /////Carreras////
-    
-        public void agregarCarrera() {
+    /////Carreras////
+
+    public void agregarCarrera() {
         Scanner scanner01 = new Scanner(System.in);
         try {
             System.out.print("Digite el nombre de la carrera: ");
@@ -251,7 +233,7 @@ public void subMenuCarreras() {
             System.out.println("Formato incorrecto, intente de nuevo");
         }
     }
-        
+
     public void eliminarCarrera() {
         Scanner scanner02 = new Scanner(System.in);
         try {
@@ -260,14 +242,14 @@ public void subMenuCarreras() {
             Carrera nuevaCarrera = new Carrera();
             nuevaCarrera.setNombre(nombreCarrera);
             MantenimientoCarrera mantCarrera = new MantenimientoCarrera();
-            mantCarrera.eliminarCarrera(carrera,nuevaCarrera);
+            mantCarrera.eliminarCarrera(carrera, nuevaCarrera);
             scanner02.nextLine();
         } catch (NumberFormatException e) {
             System.out.println("Formato incorrecto, intente de nuevo");
         }
     }
-    
-        public void modificarCarrera() {
+
+    public void modificarCarrera() {
         Scanner scanner03 = new Scanner(System.in);
         try {
             System.out.print("Digite el nombre de la carrera a modificar:");
@@ -282,10 +264,9 @@ public void subMenuCarreras() {
             System.out.println("Formato incorrecto, intente de nuevo");
         }
     }
-        
 
-public void consultarCarrera() {
-      Scanner scanner01 = new Scanner(System.in);
+    public void consultarCarrera() {
+        Scanner scanner01 = new Scanner(System.in);
         try {
             System.out.print("Digite el nombre de la carrera a consultar:");
             String nombreCarrera = scanner01.nextLine();
@@ -296,6 +277,71 @@ public void consultarCarrera() {
         } catch (NumberFormatException e) {
             System.out.println("Formato incorrecto, intente de nuevo");
         }
-    }  
- 
+    }
+
+// Estudiante ////////
+    public void subMenuPersona() {
+        Main inicio = new Main();
+        Scanner scanner01 = new Scanner(System.in);
+        boolean b = true;
+        while (b) {
+            System.out.println("-------------------SubMenu--------------------");
+            System.out.println("Seleccione una opcion");
+            System.out.println("1-Agregar");
+            System.out.println("2-Modificar");
+            System.out.println("3-Eliminar");
+            System.out.println("4-Consultar");
+            System.out.println("5-Salir");
+            System.out.println("----------------------------------------------");
+            String operacion = scanner01.nextLine();
+            int operador = -1;
+            try {
+                operador = Integer.parseInt(operacion);
+            } catch (NumberFormatException e) {
+                System.out.println("Opcion invalida");
+            }
+            switch (operador) {
+                case 1:
+                    agregarEstudiante();
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+                case 5:
+                    System.out.println("Saliendo del sistema");
+                    b = false;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+    
+    public void agregarEstudiante() {
+        Scanner scanner01 = new Scanner(System.in);
+        System.out.println("Ingrese la cedula");
+        try {
+            int cedula = Integer.parseInt(scanner01.nextLine());
+            System.out.println("Ingrese el nombre del curso");
+            String nombre = scanner01.nextLine();
+            System.out.println("Ingrese nombre del director");
+            String director = scanner01.nextLine();
+            //
+            Curso nuevoCurso = new Curso();
+            Profesor profesor = new Profesor();
+            Carrera carrera = new Carrera();
+            //Mantenimientos.agregarCurso(curso, nuevoCurso);
+
+        } catch (NumberFormatException e) {
+            System.out.println("Cedula debe ser numerica");
+        }
+    }
+
 }
