@@ -52,7 +52,7 @@ public class Main {
 
                     break;
                 case 4:
-
+                    inicio.agregarEstudiante();
                     break;
                 case 5:
                     System.out.println("Saliendo del sistema");
@@ -280,7 +280,7 @@ public class Main {
     }
 
 // Estudiante ////////
-    public void subMenuPersona() {
+    public void subMenuEstudiante() {
         Main inicio = new Main();
         Scanner scanner01 = new Scanner(System.in);
         boolean b = true;
@@ -320,28 +320,25 @@ public class Main {
                 default:
                     break;
             }
-
         }
     }
-    
+   
     public void agregarEstudiante() {
         Scanner scanner01 = new Scanner(System.in);
         System.out.println("Ingrese la cedula");
         try {
             int cedula = Integer.parseInt(scanner01.nextLine());
-            System.out.println("Ingrese el nombre del curso");
+            System.out.println("Digite el nombre:");
             String nombre = scanner01.nextLine();
-            System.out.println("Ingrese nombre del director");
-            String director = scanner01.nextLine();
-            //
-            Curso nuevoCurso = new Curso();
-            Profesor profesor = new Profesor();
-            Carrera carrera = new Carrera();
-            //Mantenimientos.agregarCurso(curso, nuevoCurso);
-
+            System.out.println("Digite la fecha nacimiento:");
+            String fecha = scanner01.nextLine();
+            System.out.println("Digite el Carnet:");
+            String carnet = scanner01.nextLine();
+            Estudiante estudiante=new Estudiante();           
+            Mantenimientos.agregarPersona(profesor, estudiante);
         } catch (NumberFormatException e) {
             System.out.println("Cedula debe ser numerica");
         }
     }
-
+    
 }
