@@ -68,10 +68,17 @@ public class Estudiante extends Persona {
     @Override
     public String toString() {//revisar
         return "Estudiante{"
+                + "Identificacion='" + identificacion + '\''
+                + "Nombre='" + nombre + '\''
+                + "Fecha Nacimiento='" + fechaNacimiento + '\''
                 + "carne='" + carnet + '\''
                 + ", carrera='" + Arrays.toString(carrera) + '\''
                 + ", curso='" + Arrays.toString(curso) + '\''
                 + '}';
+    }
+
+    public void setFechaNacimiento(String fecha) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

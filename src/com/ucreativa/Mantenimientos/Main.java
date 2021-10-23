@@ -8,6 +8,10 @@ package com.ucreativa.Mantenimientos;
 import com.ucreativa.personas.*;
 import com.ucreativa.universidad.*;
 import java.util.Scanner;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 
 /**
  *
@@ -19,6 +23,7 @@ public class Main {
     private Carrera[] carrera = new Carrera[10];
     private Curso[] curso = new Curso[10];
     private Mantenimientos cursos = new Mantenimientos();
+    private Estudiante[] estudiantes= new Estudiante[10];
 
     public static void main(String[] args) {
         Main inicio = new Main();
@@ -305,13 +310,13 @@ public class Main {
                     agregarEstudiante();
                     break;
                 case 2:
-                    
+
                     break;
                 case 3:
-                    
+
                     break;
                 case 4:
-                    
+
                     break;
                 case 5:
                     System.out.println("Saliendo del sistema");
@@ -322,23 +327,41 @@ public class Main {
             }
         }
     }
-   
+
+     public static Date ParseFecha(String fecha)
+    {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        try {
+            fechaDate = formato.parse(fecha);
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+    }
+
     public void agregarEstudiante() {
         Scanner scanner01 = new Scanner(System.in);
-        System.out.println("Ingrese la cedula");
+        
         try {
-            int cedula = Integer.parseInt(scanner01.nextLine());
+            System.out.println("Ingrese la cedula");
+            String cedula = scanner01.nextLine();
             System.out.println("Digite el nombre:");
-            String nombre = scanner01.nextLine();
-            System.out.println("Digite la fecha nacimiento:");
-            String fecha = scanner01.nextLine();
+            String nombre = scanner01.nextLine();            
+            System.out.println("Digite la fecha nacimiento (Formato: dd/MM/yyyy:");
+            String fecha = scanner01.nextLine();          
             System.out.println("Digite el Carnet:");
             String carnet = scanner01.nextLine();
-            Estudiante estudiante=new Estudiante();           
-            Mantenimientos.agregarPersona(profesor, estudiante);
+            Estudiante estudiante = new Estudiante();
+            estudiante.setIdentificacion(cedula);
+            estudiante.setNombre(nombre);
+            estudiante.setFechaNacimiento(ParseFecha(fecha));
+            estudiante.setCarnet(carnet);            
+            Mantenimientos.agregarPersona(estudiantes, estudiante);
         } catch (NumberFormatException e) {
             System.out.println("Cedula debe ser numerica");
         }
     }
-    
 }
