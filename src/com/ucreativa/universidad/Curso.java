@@ -17,7 +17,6 @@ public class Curso{
     private Carrera carrera;
     private int creditos = 0;
     private Profesor profesor;
-    private int Cod=0;
 
     public Curso() {
     }

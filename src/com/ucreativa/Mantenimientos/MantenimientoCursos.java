@@ -64,7 +64,8 @@ public class MantenimientoCursos {
 
     public static Curso consultarCurso (Curso[] cursos, String nombreActual) {
         for (int i = 0; i < cursos.length; i++) {
-            if (cursos[i] != null && cursos[i].getNombre()== nombreActual) {
+            if (cursos[i] != null && (cursos[i].getNombre().equals(nombreActual))) {
+                System.out.println("Registro Encontrado Satisfactoriamente: " + " Nombre Curso "+ cursos[i].getNombre()+" con " + "Creditos "+ cursos[i].getCreditos());
                 return cursos[i];
             }
         }

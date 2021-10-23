@@ -1,6 +1,5 @@
 package com.ucreativa.Mantenimientos;
 import com.ucreativa.personas.*;
-import com.ucreativa.universidad.*;
 
 /**
  *
@@ -40,7 +39,7 @@ public class Mantenimientos {
     public static void eliminar(Persona[] persona, String identificacion) {
         boolean recordfound = true;
         for (int i = 0; i < persona.length; i++) {
-            if (persona[i] != null && persona[i].getIdentificacion() == identificacion) {
+            if (persona[i] != null && (persona[i].getIdentificacion() == null ? identificacion == null : persona[i].getIdentificacion().equals(identificacion))) {
                 recordfound = true;
                 persona[i] = null;
                 System.out.println("Registro eliminado " + identificacion + "satisfactoriamente");
@@ -74,7 +73,7 @@ public class Mantenimientos {
     public static void modificar(Persona[] persona, String identificacionActual, Persona identificacionNueva) {
         boolean recordfound = true;
         for (int i = 0; i < persona.length; i++) {
-            if (persona[i] != null && persona[i].getIdentificacion() == identificacionActual) {
+            if (persona[i] != null && (persona[i].getIdentificacion() == null ? identificacionActual == null : persona[i].getIdentificacion().equals(identificacionActual))) {
                 recordfound = true;
                 persona[i] = identificacionNueva;
                 System.out.println("Registro modificado" + identificacionActual + "satisfactoriamente");
@@ -89,9 +88,9 @@ public class Mantenimientos {
     }
 
     public static Persona consultar(Persona[] persona, String identificacionActual) {
-        for (int i = 0; i < persona.length; i++) {
-            if (persona[i] != null && persona[i].getIdentificacion() == identificacionActual) {
-                return persona[i];
+        for (Persona persona1 : persona) {
+            if (persona1 != null && (persona1.getIdentificacion() == null ? identificacionActual == null : persona1.getIdentificacion().equals(identificacionActual))) {
+                return persona1;
             }
         }
         return null;
