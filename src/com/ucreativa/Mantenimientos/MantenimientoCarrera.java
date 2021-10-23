@@ -12,80 +12,93 @@ import com.ucreativa.universidad.Carrera;
  */
 public class MantenimientoCarrera {
     
-        //Agregar carrera
-    public static void agregarCarrera(Carrera[] carreras, Carrera registro) {
-        for (int i = 0; i < carreras.length; i++) {
-            if (carreras[i] == null) {
-                carreras[i] = registro;
-                System.out.println("Se ha agregado la carrera" + registro + "satisfactoriamente");
-                break;
-            } else {
-                System.out.println("No se puede ingresar mas carreras");
-            }
-        }
+    public static Carrera[] agregar(Carrera[] lista, Carrera dato) {
+    int indice = indiceAAgregar(lista);
+    if (indice == lista.length){
+        // La lista esta llena, expanda el arreglo
+        lista = expandirArreglo(lista);
     }
-    
-        //Eliminar carrera
-    public static void eliminarCarrera(Carrera[] carreras, Carrera registro) {
-       boolean recordfound = true;
-        for (int i = 0; i < carreras.length; i++) {
-            if (carreras[i] != null && carreras[i].getNombre().equals(registro.getNombre())) {
-                recordfound = true;
-                carreras[i] = null;
-                System.out.println("Se ha eliminado el registro " + registro + "satisfactoriamente");
-                break;
-            } else {
-                recordfound = false;
-            }
+    lista[indice] = dato;
+    return lista;
+}
+
+    public static boolean eliminar(Carrera[] lista, String nombre) throws Exception {
+        int indiceAEliminar = buscarDato(lista, nombre);
+        if (indiceAEliminar == -1) {
+            throw new Exception("Carrera con el nombre " + nombre + " no encontrada para eliminar");
         }
-        if (recordfound == false) {
-            System.out.println("El registro no existe");
+
+        // Borre el elemento
+        lista[indiceAEliminar] = null;
+        // Mueva los elementos a la izquierda
+        int j = indiceAEliminar + 1;
+        while (j < lista.length && lista[j] != null) {
+            lista[j-1] = lista[j];
+            lista[j] = null;
+            j++;
         }
+        return true;
     }
-    
-    //Modificar Carrera
-        public static void modificarCarrera(Carrera[] carreras, String nombreCarrera, Carrera registroNuevo) {
-        boolean recordfound = true;
-        for (int i = 0; i < carreras.length; i++) {
-            if (carreras[i] != null && carreras[i].getNombre().equals(nombreCarrera)) {
-                recordfound = true;
-                carreras[i] = registroNuevo;
-                System.out.println("Registro modificado satisfactoriamente:" + " "+carreras[i].getNombre());
-                break;
-            } else {
-                recordfound = false;
-            }
+
+    public static Carrera consultar(Carrera[] lista, String nombre) throws Exception {
+        int indiceAConsultar = buscarDato(lista, nombre);
+        if (indiceAConsultar == -1) {
+            throw new Exception("Carrera con el nombre " + nombre + " no encontrada para consultar");
         }
-        if (recordfound == false) {
-            System.out.println("El registro no existe");
-        }
+
+        return lista[indiceAConsultar];
     }
-        
-     //Consultar carrera   
-   /* public static Carrera consultarCarrera(Carrera[] carreras, String nombreActual) {
-        for (int i = 0; i < carreras.length; i++) {
-            if (carreras[i] != null && carreras[i].getNombre()== nombreActual) {
-                return carreras[i];
-            }
+
+    public static boolean modificar(Carrera[] lista, String nombre, Carrera nuevoDato) throws Exception {
+        int indiceAModificar = buscarDato(lista, nombre);
+        if (indiceAModificar == -1) {
+            throw new Exception("Carrera con el nombre " + nombre + " no encontrada para modificar");
         }
-        return null;
-    }*/
-        
-    public static void consultarCarrera(Carrera[] carreras, String nombreActual) {
-          boolean recordfound = true;
-        for (int i = 0; i < carreras.length; i++) {
-            if (carreras[i] != null && carreras[i].getNombre().equals(nombreActual)) {
-                recordfound = true;
-                //carreras[i] = registroNuevo;
-                System.out.println("Registro encontrado satisfactoriamente:" + " "+carreras[i].getNombre());
-                break;
-            } else {
-                recordfound = false;
-            }
-        }
-        if (recordfound == false) {
-            System.out.println("El registro no fue encontrado");
-        }
+
+        lista[indiceAModificar] = nuevoDato;
+
+        return true;
     }
-    
+
+    public static boolean nombreExiste(Carrera[] lista, String id) {
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] != null && lista[i].getNombre().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int buscarDato(Carrera[] lista, String nombre) {
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] != null && lista[i].getNombre().equals(nombre)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static int indiceAAgregar(Carrera[] lista) {
+        int i = 0;
+        do {
+            if (lista[i] == null) {
+                break;
+            }
+            i++;
+        } while (i < lista.length);
+
+        return i;
+    }
+
+    private static Carrera[] expandirArreglo(Carrera[] lista) {
+        int tamannoNuevo = lista.length * 2;
+        Carrera[] listaVieja = lista;
+        Carrera[] listaNueva = new Carrera[tamannoNuevo];
+
+        for (int i = 0; i < listaVieja.length; i++) {
+            listaNueva[i] = listaVieja[i];
+        }
+
+        return listaNueva;
+    }
 }

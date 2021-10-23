@@ -11,85 +11,94 @@ import com.ucreativa.personas.Profesor;
  *
  * @author verog
  */
-public class Curso{
+public class Curso {
+    private String nombre;
 
-    private String nombreCurso = "";
     private Carrera carrera;
-    private int creditos = 0;
+
+    private int creditos;
+
     private Profesor profesor;
 
-    public Curso() {
-    }
-    
-    //constructor todos los parametros nombrecurso,carrera carrera, creditos, profesor profesor
-    public Curso(String nombreCurso, Carrera carrera, int creditos, Profesor profesor) {
-        this.nombreCurso = nombreCurso;
+    public Curso(String nombre, Carrera carrera, int creditos, Profesor profesor) {
+        this.nombre = nombre;
         this.carrera = carrera;
         this.creditos = creditos;
         this.profesor = profesor;
     }
-    /**
-     * @return the nombre
-     */
+
+    public Curso(String nombre, int creditos) {
+        this.nombre = nombre;
+        this.creditos = creditos;
+    }
+
+    public Curso(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getNombre() {
-        return this.nombreCurso;
+        return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
     public void setNombre(String nombre) {
-        this.nombreCurso = nombre;
+        this.nombre = nombre;
     }
 
-    /**
-     * @return the carrera
-     */
     public Carrera getCarrera() {
-        return this.carrera;
+        return carrera;
     }
 
-    /**
-     * @param carrera the carrera to set
-     */
     public void setCarrera(Carrera carrera) {
         this.carrera = carrera;
     }
 
-    /**
-     * @return the creditos
-     */
     public int getCreditos() {
-        return this.creditos;
+        return creditos;
     }
 
-    /**
-     * @param creditos the creditos to set
-     */
     public void setCreditos(int creditos) {
         this.creditos = creditos;
     }
 
-    /**
-     * @return the profesor
-     */
     public Profesor getProfesor() {
-        return this.profesor;
+        return profesor;
     }
 
-    /**
-     * @param profesor the profesor to set
-     */
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
 
     @Override
     public String toString() {
-        return "{"
-                + "nombre='" + nombreCurso + '\''
-                + ", creditos='" + creditos + '\''
-                + '}';
+        return "Curso{" +
+                "nombre='" + nombre + '\'' +
+                ", carrera=" + imprimeCarrera() +
+                ", creditos=" + creditos +
+                ", profesor=" + imprimeProfesor() +
+                '}';
     }
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Curso curso = (Curso) o;
+        return nombre.equals(curso.nombre);
+    }
+
+    private String imprimeProfesor(){
+        if (profesor == null) {
+            return "";
+        }
+
+        return profesor.getNombre();
+    }
+
+    private String imprimeCarrera(){
+        if (carrera == null) {
+            return "";
+        }
+
+        return carrera.getNombre();
+    }
 }

@@ -7,6 +7,7 @@ package com.ucreativa.personas;
 
 import com.ucreativa.universidad.Carrera;
 import com.ucreativa.universidad.Curso;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 /**
@@ -14,71 +15,85 @@ import java.util.Arrays;
  * @author verog
  */
 public class Estudiante extends Persona {
+    private String carnet;
 
-    private String carnet = "";
-    private Carrera[] carrera = null;
-    private Curso[] curso = null;
-    
+    private Carrera[] carreras;
 
-    public Estudiante() {
-    }
+    private Curso[] cursos;
 
-    /**
-     * @return the carnet
-     */
     public String getCarnet() {
-        return this.carnet;
+        return carnet;
     }
 
-    /**
-     * @param carne the carnet to set
-     */
-    public void setCarnet(String carne) {
-        this.carnet = carne;
+    public void setCarnet(String carnet) {
+        this.carnet = carnet;
     }
 
-    /**
-     * @return the carreras
-     */
     public Carrera[] getCarreras() {
-        return this.carrera;
+        return carreras;
     }
 
-    /**
-     * @param carreras the carreras to set
-     */
     public void setCarreras(Carrera[] carreras) {
-        this.carrera = carreras;
+        this.carreras = carreras;
     }
 
-    /**
-     * @return the cursos
-     */
     public Curso[] getCursos() {
-        return this.curso;
+        return cursos;
     }
 
-    /**
-     * @param cursos the cursos to set
-     */
     public void setCursos(Curso[] cursos) {
-        this.curso = cursos;
+        this.cursos = cursos;
+    }
+
+    public Estudiante(String identificacion, String nombre, LocalDate fechaNacimiento, String carnet, Carrera[] carreras, Curso[] cursos) {
+        super(identificacion, nombre, fechaNacimiento);
+        this.carnet = carnet;
+        this.carreras = carreras;
+        this.cursos = cursos;
+    }
+
+    public Estudiante(String identificacion, String nombre, LocalDate fechaNacimiento, String carnet) {
+        super(identificacion, nombre, fechaNacimiento);
+        this.carnet = carnet;
+        carreras = new Carrera[10];
+        cursos = new Curso[10];
     }
 
     @Override
-    public String toString() {//revisar
-        return "Estudiante{"
-                + "Identificacion='" + identificacion + '\''
-                + "Nombre='" + nombre + '\''
-                + "Fecha Nacimiento='" + fechaNacimiento + '\''
-                + "carne='" + carnet + '\''
-                + ", carrera='" + Arrays.toString(carrera) + '\''
-                + ", curso='" + Arrays.toString(curso) + '\''
-                + '}';
+    public String toString() {
+        return "Estudiante{" +
+                "identificacion='" + identification + '\'' +
+                ", carnet='" + carnet + '\'' +
+                ", carreras=" + imprimeCarreras() +
+                ", cursos=" + imprimeCursos() +
+                ", nombre='" + nombre + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                '}';
     }
 
-    public void setFechaNacimiento(String fecha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private String imprimeCarreras() {
+        String carrerasTexto = "";
+        for (int i = 0; i < carreras.length; i++) {
+            if (carreras[i] == null)
+                break;
+            else {
+                carrerasTexto += carreras[i] + "|";
+            }
+        }
+
+        return carrerasTexto;
     }
 
+    private String imprimeCursos() {
+        String cursosTexto = "";
+        for (int i = 0; i < cursos.length; i++) {
+            if (cursos[i] == null)
+                break;
+            else {
+                cursosTexto += cursos[i] + "|";
+            }
+        }
+
+        return cursosTexto;
+    }
 }

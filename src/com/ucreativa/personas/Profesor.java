@@ -6,53 +6,66 @@
 package com.ucreativa.personas;
 
 import com.ucreativa.universidad.Carrera;
-import java.util.Arrays;
+import java.time.LocalDate;
 
 /**
  *
  * @author verog
  */
 public class Profesor extends Persona {
+    private String idEmpleado;
 
-    private String idEmpleado = "";
-    private Carrera[] carreras = null;  //crear clase carrera
+    private Carrera[] carreras;
 
-    public Profesor() {
-    }
-
-    /**
-     * @return the idEmpleado
-     */
-    public String getIdEmpleado() {
-        return idEmpleado;
-    }
-
-    /**
-     * @param idEmpleado the idEmpleado to set
-     */
-    public void setIdEmpleado(String idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
-
-    /**
-     * @return the carreras
-     */
     public Carrera[] getCarreras() {
         return carreras;
     }
 
-    /**
-     * @param carreras the carreras to set
-     */
     public void setCarreras(Carrera[] carreras) {
         this.carreras = carreras;
     }
 
+    public String getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(String idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
+    public Profesor(String identificacion, String nombre, LocalDate fechaNacimiento, String idEmpleado, Carrera[] carreras) {
+        super(identificacion, nombre, fechaNacimiento);
+        this.idEmpleado = idEmpleado;
+        this.carreras = carreras;
+    }
+
+    public Profesor(String identificacion, String nombre, LocalDate fechaNacimiento, String idEmpleado) {
+        super(identificacion, nombre, fechaNacimiento);
+        this.idEmpleado = idEmpleado;
+        this.carreras = new Carrera[10];
+    }
+
     @Override
-    public String toString() {//revisar
-        return "Profesor{"
-                + "idEmpleado='" + idEmpleado + '\''
-                + ", carreras='" + Arrays.toString(carreras) + '\''
-                + '}';
+    public String toString() {
+        return "Profesor{" +
+                "identification='" + identification + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", idEmpleado='" + idEmpleado + '\'' +
+                ", carreras=" + imprimeCarrerasAsociadas() +
+                '}';
+    }
+
+    private String imprimeCarrerasAsociadas() {
+        String carrerasTexto = "";
+        for (int i = 0; i < carreras.length; i++) {
+            if (carreras[i] == null)
+                break;
+            else {
+                carrerasTexto += carreras[i] + "|";
+            }
+        }
+
+        return carrerasTexto;
     }
 }

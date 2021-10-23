@@ -11,45 +11,56 @@ import com.ucreativa.personas.Profesor;
  * @author verog
  */
 public class Carrera {
+    private String nombre;
 
-    private String nombre = "";
-    private Profesor director = new Profesor();
+    private Profesor director;
 
-    public Carrera() {
-    }
-
-    /**
-     * @return the nombre
-     */
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * @return the director
-     */
     public Profesor getDirector() {
-        return this.director;
+        return director;
     }
 
-    /**
-     * @param director the director to set
-     */
     public void setDirector(Profesor director) {
         this.director = director;
     }
 
-    public String toString() {//revisar
-        return "Carrera{"
-                + "nombre='" + nombre + '\''
-                + ", director='" + director + '\''
-                + '}';
+    public Carrera(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Carrera(String nombre, Profesor profesor) {
+        this.nombre = nombre;
+        this.director = profesor;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrera{" +
+                "nombre='" + nombre + '\'' +
+                ", director=" + imprimeDirector() +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Carrera carrera = (Carrera) o;
+        return nombre.equals(carrera.nombre);
+    }
+
+    private String imprimeDirector() {
+        if (director == null) {
+            return "";
+        }
+
+        return director.getNombre();
     }
 }

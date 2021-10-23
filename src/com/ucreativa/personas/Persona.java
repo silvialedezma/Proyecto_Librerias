@@ -4,65 +4,63 @@
  * and open the template in the editor.
  */
 package com.ucreativa.personas;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
  *
  * @author verog
  */
-public abstract class Persona {
+public abstract class Persona{
+    protected String identification;
 
-    protected String identificacion = "";
-    protected String nombre = "";
-    protected Date fechaNacimiento = null;
+    protected String nombre;
 
-    
-    public Persona() {
+    protected LocalDate fechaNacimiento;
+
+    public String getIdentification() {
+        return identification;
     }
 
-    /**
-     * @return the identification
-     */
-    public String getIdentificacion() {
-        return this.identificacion;
+    public void setIdentification(String identification) {
+        this.identification = identification;
     }
 
-    /**
-     * @param identification the identification to set
-     */
-    public void setIdentificacion(String identificacion) {
-        this.identificacion = identificacion;
-    }
-
-    /**
-     * @return the nombre
-     */
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * @return the fechaNacimiento
-     */
-    public Date getFechaNacimiento() {
-        return this.fechaNacimiento;
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    /**
-     * @param fechaNacimiento the fechaNacimiento to set
-     */
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-   @Override
+    public Persona(String identification, String nombre, LocalDate fechaNacimiento) {
+        this.identification = identification;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Persona(String identification)
+    {
+        this.identification = identification;
+    }
+
+    @Override
     public abstract String toString();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Persona persona = (Persona) o;
+        return identification.equals(persona.identification);
+    }
 }

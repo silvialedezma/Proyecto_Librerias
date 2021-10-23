@@ -5,7 +5,6 @@
  */
 package com.ucreativa.Mantenimientos;
 
-import com.ucreativa.personas.Persona;
 import com.ucreativa.universidad.Curso;
 
 /**
@@ -14,62 +13,94 @@ import com.ucreativa.universidad.Curso;
  */
 public class MantenimientoCursos {
 
-    //Agregar un curso
-    public static void agregarCurso(Curso[] cursos, Curso registro) {
-        for (int i = 0; i < cursos.length; i++) {
-            if (cursos[i] == null) {
-                cursos[i] = registro;
-                System.out.println("Se ha agregado el Curso " + registro + "satisfactoriamente");
-                break;
-            } else {
-                System.out.println("No se puede ingresar mas cursos");
-            }
+    public static Curso[] agregar(Curso[] lista, Curso dato) {
+        int indice = indiceAAgregar(lista);
+        if (indice == lista.length){
+            // La lista esta llena, expanda el arreglo
+            lista = expandirArreglo(lista);
         }
+        lista[indice] = dato;
+        return lista;
     }
 
-    //Eliminar un curso
-    public static void eliminarCurso(Curso[] cursos, Curso registro) {
-        boolean recordfound = true;
-        for (int i = 0; i < cursos.length; i++) {
-            if (cursos[i] != null && cursos[i].getNombre().equals(registro.getNombre())) {
-                recordfound = true;
-                cursos[i] = null;
-                System.out.println("Se ha eliminado el registro " + registro + "satisfactoriamente");
-                break;
-            } else {
-                recordfound = false;
-            }
+    public static boolean eliminar(Curso[] lista, String nombre) throws Exception {
+        int indiceAEliminar = buscarDato(lista, nombre);
+        if (indiceAEliminar == -1) {
+            throw new Exception("Curso con el nombre " + nombre + " no encontrado para eliminar");
         }
-        if (recordfound == false) {
-            System.out.println("El registro no existe");
+
+        // Borre el elemento
+        lista[indiceAEliminar] = null;
+        // Mueva los elementos a la izquierda
+        int j = indiceAEliminar+1;
+        while (j < lista.length && lista[j] != null) {
+            lista[j-1] = lista[j];
+            lista[j] = null;
+            j++;
         }
+        return true;
     }
 
-    public static void modificarCurso(Curso[] cursos, String nombreCurso, Curso registroNuevo) {
-        boolean recordfound = true;
-        for (int i = 0; i < cursos.length; i++) {
-            if (cursos[i] != null && cursos[i].getNombre().equals(nombreCurso)) {
-                recordfound = true;
-                cursos[i] = registroNuevo;
-                System.out.println("Registro modificado" + cursos[i].getNombre() + "satisfactoriamente");
-                break;
-            } else {
-                recordfound = false;
-            }
+    public static Curso consultar(Curso[] lista, String nombre) throws Exception {
+        int indiceAConsultar = buscarDato(lista, nombre);
+        if (indiceAConsultar == -1) {
+            throw new Exception("Curso con el nombre" + nombre + " no encontrado para consultar");
         }
-        if (recordfound == false) {
-            System.out.println("El registro no existe");
-        }
+
+        return lista[indiceAConsultar];
     }
 
-    public static Curso consultarCurso (Curso[] cursos, String nombreActual) {
-        for (int i = 0; i < cursos.length; i++) {
-            if (cursos[i] != null && (cursos[i].getNombre().equals(nombreActual))) {
-                System.out.println("Registro Encontrado Satisfactoriamente: " + " Nombre Curso "+ cursos[i].getNombre()+" con " + "Creditos "+ cursos[i].getCreditos());
-                return cursos[i];
+    public static boolean modificar(Curso[] lista, String nombre, Curso nuevoDato) throws Exception {
+        int indiceAModificar = buscarDato(lista, nombre);
+        if (indiceAModificar == -1) {
+            throw new Exception("Curso con el nombre " + nombre + " no encontrado para modificar");
+        }
+
+        lista[indiceAModificar] = nuevoDato;
+
+        return true;
+    }
+
+    public static boolean nombreExiste(Curso[] lista, String nombre) {
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] != null && lista[i].getNombre().equals(nombre)) {
+                return true;
             }
         }
-        return null;
+        return false;
+    }
+
+    public static int buscarDato(Curso[] lista, String nombre) {
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] != null && lista[i].getNombre().equals(nombre)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static int indiceAAgregar(Curso[] lista) {
+        int i = 0;
+        do {
+            if (lista[i] == null) {
+                break;
+            }
+            i++;
+        } while (i < lista.length);
+
+        return i;
+    }
+
+    private static Curso[] expandirArreglo(Curso[] lista) {
+        int tamannoNuevo = lista.length * 2;
+        Curso[] listaVieja = lista;
+        Curso[] listaNueva = new Curso[tamannoNuevo];
+
+        for (int i = 0; i < listaVieja.length; i++) {
+            listaNueva[i] = listaVieja[i];
+        }
+
+        return listaNueva;
     }
 }
 
