@@ -5,7 +5,9 @@
  */
 package com.ucreativa.personas;
 import java.util.Date;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 /**
  *
  * @author verog
@@ -14,7 +16,7 @@ public abstract class Persona {
 
     protected String identificacion = "";
     protected String nombre = "";
-    protected Date fechaNacimiento = null;
+    private LocalDate fechaNacimiento = null;
 
     
     public Persona() {
@@ -51,18 +53,23 @@ public abstract class Persona {
     /**
      * @return the fechaNacimiento
      */
-    public Date getFechaNacimiento() {
-        return this.fechaNacimiento;
+
+
+   @Override
+    public abstract String toString();
+
+    /**
+     * @return the fechaNacimiento
+     */
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
     /**
      * @param fechaNacimiento the fechaNacimiento to set
      */
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-
-   @Override
-    public abstract String toString();
 
 }

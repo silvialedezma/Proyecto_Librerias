@@ -66,19 +66,37 @@ public class Estudiante extends Persona {
     }
 
     @Override
-    public String toString() {//revisar
+    public String toString() {
         return "Estudiante{"
                 + "Identificacion='" + identificacion + '\''
                 + "Nombre='" + nombre + '\''
-                + "Fecha Nacimiento='" + fechaNacimiento + '\''
+                + "Fecha Nacimiento='" + getFechaNacimiento() + '\''
                 + "carne='" + carnet + '\''
-                + ", carrera='" + Arrays.toString(carrera) + '\''
-                + ", curso='" + Arrays.toString(curso) + '\''
+                + ", carrera='" + imprimeCarrerasAsociadas()+ '\''
+                + ", curso='" + imprimeCursosAsociadas() + '\''
                 + '}';
     }
+    
+private String imprimeCarrerasAsociadas() {
+        String carrerasTexto = "";
+        for (int i = 0; i < carrera.length; i++) {
+            if (carrera[i] != null)
+            {
+                carrerasTexto += carrera[i].getNombre() + "|";
+            }
+        }
 
-    public void setFechaNacimiento(String fecha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return carrerasTexto;
     }
+private String imprimeCursosAsociadas() {
+        String cursosTexto = "";
+        for (int i = 0; i < curso.length; i++) {
+            if (curso[i] != null)
+            {
+                cursosTexto += curso[i].getNombre() + "|";
+            }
+        }
 
+        return cursosTexto;
+    }
 }

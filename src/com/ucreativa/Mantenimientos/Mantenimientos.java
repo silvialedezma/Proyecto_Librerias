@@ -1,5 +1,8 @@
 package com.ucreativa.Mantenimientos;
+
 import com.ucreativa.personas.*;
+import com.ucreativa.universidad.Carrera;
+import com.ucreativa.universidad.Curso;
 
 /**
  *
@@ -11,10 +14,10 @@ public class Mantenimientos {
         for (int i = 0; i < persona.length; i++) {
             if (persona[i] == null) {
                 persona[i] = registro;
-                System.out.println("Se ha agregado el registro " + registro + "satisfactoriamente");
+                System.out.println("Registro agregado exitosamente: " + registro);
                 break;
             } else {
-                System.out.println("No se puede ingresar mas registros");
+                System.out.println("Error: No se puede ingresar mas registros");
             }
         }
     }
@@ -25,14 +28,14 @@ public class Mantenimientos {
             if (persona[i] != null && persona[i] == registro) {
                 recordfound = true;
                 persona[i] = null;
-                System.out.println("Se ha eliminado el registro " + registro + "satisfactoriamente");
+                System.out.println("Registro eliminado exitosamente:" + registro);
                 break;
             } else {
                 recordfound = false;
             }
         }
         if (recordfound == false) {
-            System.out.println("El registro no existe");
+            System.out.println("Error: El registro no existe");
         }
     }
 
@@ -42,55 +45,56 @@ public class Mantenimientos {
             if (persona[i] != null && (persona[i].getIdentificacion() == null ? identificacion == null : persona[i].getIdentificacion().equals(identificacion))) {
                 recordfound = true;
                 persona[i] = null;
-                System.out.println("Registro eliminado " + identificacion + "satisfactoriamente");
+                System.out.println("Registro eliminado exitosamente:" + identificacion);
                 break;
             } else {
                 recordfound = false;
             }
         }
         if (recordfound == false) {
-            System.out.println("El registro no existe");
+            System.out.println("Error: El registro no existe");
         }
     }
 
-    public static void modificarPersona(Persona[] persona, Persona registroActual, Persona registroNuevo) {
+    public static void modificarPersona(Persona[] persona, String identificacion, Persona registroNuevo) {
         boolean recordfound = true;
         for (int i = 0; i < persona.length; i++) {
-            if (persona[i] != null && persona[i] == registroActual) {
+            if (persona[i] != null && persona[i].getIdentificacion().equals(identificacion)) {
                 recordfound = true;
                 persona[i] = registroNuevo;
-                System.out.println("Registro modificado" + registroActual + "satisfactoriamente");
+                System.out.println("Registro modificado exitosamente:" + persona[i]);
                 break;
             } else {
                 recordfound = false;
             }
         }
         if (recordfound == false) {
-            System.out.println("El registro no existe");
-        }
-    }
-
-    public static void modificarPersona(Persona[] persona, String identificacionActual, Persona identificacionNueva) {
-        boolean recordfound = true;
-        for (int i = 0; i < persona.length; i++) {
-            if (persona[i] != null && (persona[i].getIdentificacion() == null ? identificacionActual == null : persona[i].getIdentificacion().equals(identificacionActual))) {
-                recordfound = true;
-                persona[i] = identificacionNueva;
-                System.out.println("Registro modificado" + identificacionActual + "satisfactoriamente");
-                break;
-            } else {
-                recordfound = false;
-            }
-        }
-        if (recordfound == false) {
-            System.out.println("El registro no existe");
+            System.out.println("Error: El registro no existe");
         }
     }
 
     public static Persona consultarPersona(Persona[] persona, String identificacionActual) {
-        for (Persona persona1 : persona) {
-            if (persona1 != null && (persona1.getIdentificacion() == null ? identificacionActual == null : persona1.getIdentificacion().equals(identificacionActual))) {
-                return persona1;
+        boolean recordfound = true;
+        for (int i = 0; i < persona.length; i++) {
+            if (persona[i] != null && persona[i].getIdentificacion().equals(identificacionActual)) {
+                recordfound = true;
+                System.out.println("Registro encontrado exitosamente:"  + persona[i]);
+                break;
+            } else {
+                recordfound = false;
+            }
+        }
+        if (recordfound == false) {
+            System.out.println("Error: El registro no fue encontrado");
+        }
+        return null;
+    }
+
+    public static Persona buscarDato(Persona[] lista, String id) {
+        for (int i = 0; i < lista.length; i++) {
+
+            if (lista[i] != null && lista[i].getIdentificacion().equals(id)) {
+                return lista[i];
             }
         }
         return null;

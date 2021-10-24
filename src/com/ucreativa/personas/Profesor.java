@@ -48,11 +48,25 @@ public class Profesor extends Persona {
         this.carreras = carreras;
     }
 
-    @Override
+       @Override
     public String toString() {//revisar
         return "Profesor{"
+                + "Identificacion='" + identificacion + '\''
+                + "Nombre='" + nombre + '\''
+                + "Fecha Nacimiento='" + getFechaNacimiento() + '\''
                 + "idEmpleado='" + idEmpleado + '\''
-                + ", carreras='" + Arrays.toString(carreras) + '\''
+                + ", carreras='" + imprimeCarrerasAsociadas() + '\''
                 + '}';
+    }
+    
+    private String imprimeCarrerasAsociadas() {
+        String carrerasTexto = "";
+        for (int i = 0; i < carreras.length; i++) {
+            if (carreras[i] != null)
+            {
+                carrerasTexto += carreras[i].getNombre() + "|";
+            }
+        }
+        return carrerasTexto;
     }
 }

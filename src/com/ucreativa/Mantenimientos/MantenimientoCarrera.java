@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.ucreativa.Mantenimientos;
+
 import com.ucreativa.universidad.Carrera;
 
 /**
@@ -11,81 +12,81 @@ import com.ucreativa.universidad.Carrera;
  * @author verog
  */
 public class MantenimientoCarrera {
-    
-        //Agregar carrera
+
+    //Agregar carrera
     public static void agregarCarrera(Carrera[] carreras, Carrera registro) {
         for (int i = 0; i < carreras.length; i++) {
             if (carreras[i] == null) {
                 carreras[i] = registro;
-                System.out.println("Se ha agregado la carrera" + registro + "satisfactoriamente");
+                System.out.println("Registro agregado correctamente: " + registro);
                 break;
             } else {
-                System.out.println("No se puede ingresar mas carreras");
+                System.out.println("Error:No se puede ingresar mas carreras");
             }
         }
     }
-    
-        //Eliminar carrera
+
+    //Eliminar carrera
     public static void eliminarCarrera(Carrera[] carreras, Carrera registro) {
-       boolean recordfound = true;
+        boolean recordfound = true;
         for (int i = 0; i < carreras.length; i++) {
             if (carreras[i] != null && carreras[i].getNombre().equals(registro.getNombre())) {
                 recordfound = true;
                 carreras[i] = null;
-                System.out.println("Se ha eliminado el registro " + registro + "satisfactoriamente");
+                System.out.println("Se ha eliminado el registro exitosamente:" + registro);
                 break;
             } else {
                 recordfound = false;
             }
         }
         if (recordfound == false) {
-            System.out.println("El registro no existe");
+            System.out.println("Error:El registro no existe");
         }
     }
-    
+
     //Modificar Carrera
-        public static void modificarCarrera(Carrera[] carreras, String nombreCarrera, Carrera registroNuevo) {
+    public static void modificarCarrera(Carrera[] carreras, String nombreCarrera, Carrera registroNuevo) {
         boolean recordfound = true;
         for (int i = 0; i < carreras.length; i++) {
             if (carreras[i] != null && carreras[i].getNombre().equals(nombreCarrera)) {
                 recordfound = true;
                 carreras[i] = registroNuevo;
-                System.out.println("Registro modificado satisfactoriamente:" + " "+carreras[i].getNombre());
+                System.out.println("Registro modificado satisfactoriamente:" + carreras[i]);
                 break;
             } else {
                 recordfound = false;
             }
         }
         if (recordfound == false) {
-            System.out.println("El registro no existe");
+            System.out.println("Error:El registro no existe");
         }
     }
-        
-     //Consultar carrera   
-   /* public static Carrera consultarCarrera(Carrera[] carreras, String nombreActual) {
-        for (int i = 0; i < carreras.length; i++) {
-            if (carreras[i] != null && carreras[i].getNombre()== nombreActual) {
-                return carreras[i];
-            }
-        }
-        return null;
-    }*/
-        
+
     public static void consultarCarrera(Carrera[] carreras, String nombreActual) {
-          boolean recordfound = true;
+        boolean recordfound = true;
         for (int i = 0; i < carreras.length; i++) {
             if (carreras[i] != null && carreras[i].getNombre().equals(nombreActual)) {
                 recordfound = true;
                 //carreras[i] = registroNuevo;
-                System.out.println("Registro encontrado satisfactoriamente:" + " "+carreras[i].getNombre());
+                System.out.println("Registro encontrado satisfactoriamente:"  + carreras[i]);
                 break;
             } else {
                 recordfound = false;
             }
         }
         if (recordfound == false) {
-            System.out.println("El registro no fue encontrado");
+            System.out.println("Error:El registro no existe");
         }
     }
-    
+
+    public static Carrera buscarDato(Carrera[] lista, String nombre) {
+        for (int i = 0; i < lista.length; i++) {
+
+            if (lista[i] != null && lista[i].getNombre().equals(nombre)) {
+                return lista[i];
+            }
+        }
+        return null;
+    }
+
 }

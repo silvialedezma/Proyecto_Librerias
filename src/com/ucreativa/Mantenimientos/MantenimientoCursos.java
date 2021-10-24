@@ -6,6 +6,7 @@
 package com.ucreativa.Mantenimientos;
 
 import com.ucreativa.personas.Persona;
+import com.ucreativa.universidad.Carrera;
 import com.ucreativa.universidad.Curso;
 
 /**
@@ -19,10 +20,10 @@ public class MantenimientoCursos {
         for (int i = 0; i < cursos.length; i++) {
             if (cursos[i] == null) {
                 cursos[i] = registro;
-                System.out.println("Se ha agregado el Curso " + registro + "satisfactoriamente");
+                System.out.println("Registro agregado exitosamente:" + registro);
                 break;
             } else {
-                System.out.println("No se puede ingresar mas cursos");
+                System.out.println("Error:No se puede ingresar mas cursos");
             }
         }
     }
@@ -34,14 +35,14 @@ public class MantenimientoCursos {
             if (cursos[i] != null && cursos[i].getNombre().equals(registro.getNombre())) {
                 recordfound = true;
                 cursos[i] = null;
-                System.out.println("Se ha eliminado el registro " + registro + "satisfactoriamente");
+                System.out.println("Registro eliminado exitosamente:" + registro );
                 break;
             } else {
                 recordfound = false;
             }
         }
         if (recordfound == false) {
-            System.out.println("El registro no existe");
+            System.out.println("Error: El registro no existe");
         }
     }
 
@@ -51,7 +52,7 @@ public class MantenimientoCursos {
             if (cursos[i] != null && cursos[i].getNombre().equals(nombreCurso)) {
                 recordfound = true;
                 cursos[i] = registroNuevo;
-                System.out.println("Registro modificado" + cursos[i].getNombre() + "satisfactoriamente");
+                System.out.println("Registro modificado exitosamente:" + cursos[i]);
                 break;
             } else {
                 recordfound = false;
@@ -62,14 +63,23 @@ public class MantenimientoCursos {
         }
     }
 
-    public static Curso consultarCurso (Curso[] cursos, String nombreActual) {
+    public static Curso consultarCurso(Curso[] cursos, String nombreActual) {
         for (int i = 0; i < cursos.length; i++) {
             if (cursos[i] != null && (cursos[i].getNombre().equals(nombreActual))) {
-                System.out.println("Registro Encontrado Satisfactoriamente: " + " Nombre Curso "+ cursos[i].getNombre()+" con " + "Creditos "+ cursos[i].getCreditos());
+                System.out.println("Registro encontrado exitosamente: " + cursos[i]);
                 return cursos[i];
             }
         }
         return null;
     }
-}
 
+    public static Curso buscarDato(Curso[] lista, String nombre) {
+        for (int i = 0; i < lista.length; i++) {
+
+            if (lista[i] != null && lista[i].getNombre().equals(nombre)) {
+                return lista[i];
+            }
+        }
+        return null;
+    }
+}

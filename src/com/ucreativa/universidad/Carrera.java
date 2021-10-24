@@ -13,7 +13,7 @@ import com.ucreativa.personas.Profesor;
 public class Carrera {
 
     private String nombre = "";
-    private Profesor director = new Profesor();
+    private Profesor director;
 
     public Carrera() {
     }
@@ -46,10 +46,16 @@ public class Carrera {
         this.director = director;
     }
 
-    public String toString() {//revisar
+    public String toString() {
+        if (director != null)
+        {
+            return "Carrera{"
+                    + "nombre='" + nombre + '\''
+                    + ", director='" + director + '\''
+                    + '}';
+        }
         return "Carrera{"
-                + "nombre='" + nombre + '\''
-                + ", director='" + director + '\''
-                + '}';
+                    + "nombre='" + nombre + '\''
+                    + '}';
     }
 }
