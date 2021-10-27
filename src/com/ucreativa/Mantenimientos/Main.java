@@ -18,11 +18,11 @@ import java.time.format.DateTimeParseException;
  */
 public class Main {
 
-    private Profesor[] profesores = new Profesor[10];
-    private Carrera[] carrera = new Carrera[10];
-    private Curso[] curso = new Curso[10];
+    private Profesor[] profesores = new Profesor[20];
+    private Carrera[] carrera = new Carrera[20];
+    private Curso[] curso = new Curso[20];
     private Mantenimientos cursos = new Mantenimientos();
-    private Estudiante[] estudiantes = new Estudiante[10];
+    private Estudiante[] estudiantes = new Estudiante[20];
 
     //MENU PRINCIPAL
     public static void main(String[] args) {
@@ -31,15 +31,14 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean b = true;
         while (b) {
-            System.out.println("----------------Menu Principal----------------");
-            System.out.println("Seleccione una opcion");
+            System.out.println("----------------Menu Principal----------------");         
             System.out.println("1-Cursos");
             System.out.println("2-Carreras");
             System.out.println("3-Profesores");
             System.out.println("4-Estudiante");
             System.out.println("5-Salir");
             System.out.println("----------------------------------------------");
-            System.out.println("Opcion seleccionada:");
+            System.out.println("Seleccione una opcion:");
             String operacion = scanner.nextLine();
             int operador = -1;
             try {
@@ -81,7 +80,7 @@ public class Main {
             System.out.print("Digite la cantidad de creditos:\n");
             String cred = scanner01.nextLine();
             Curso newCurso = new Curso();
-            newCurso.setNombre(nombre);
+            newCurso.setNombre(nombre.toLowerCase());
             newCurso.setCreditos(Integer.parseInt(cred));
             MantenimientoCursos mantCurso = new MantenimientoCursos();
             mantCurso.agregarCurso(curso, newCurso);
@@ -95,9 +94,9 @@ public class Main {
         Scanner scanner01 = new Scanner(System.in);
         try {
             System.out.print("Digite el nombre del curso a consultar:\n");
-            String nombreCurso = scanner01.nextLine();
+            String nombreCurso = scanner01.nextLine();           
             Curso newCurso = new Curso();
-            newCurso.setNombre(nombreCurso);
+            newCurso.setNombre(nombreCurso.toLowerCase());
             MantenimientoCursos mantCurso = new MantenimientoCursos();
             mantCurso.consultarCurso(curso, nombreCurso);
         } catch (NumberFormatException e) {
@@ -115,7 +114,7 @@ public class Main {
             System.out.print("Digite la cantidad de creditos a modificar:\n");
             String cred = scanner03.nextLine();
             Curso newCurso = new Curso();
-            newCurso.setNombre(nombreNuevo);
+            newCurso.setNombre(nombreNuevo.toLowerCase());
             newCurso.setCreditos(Integer.parseInt(cred));
             MantenimientoCursos mantCurso = new MantenimientoCursos();
             mantCurso.modificarCurso(curso, nombre, newCurso);
@@ -130,7 +129,7 @@ public class Main {
             System.out.print("Digite el nombre del curso que desea eliminar:\n");
             String nombreCurso = scanner02.nextLine();
             Curso newCurso = new Curso();
-            newCurso.setNombre(nombreCurso);
+            newCurso.setNombre(nombreCurso.toLowerCase());
             MantenimientoCursos mantCurso = new MantenimientoCursos();
             mantCurso.eliminarCurso(curso, newCurso);
             scanner02.nextLine();
@@ -146,8 +145,9 @@ public class Main {
             System.out.print("Digite el nombre de la carrera a agregar:\n");
             String nombre = scanner01.nextLine();
             Carrera nuevaCarrera = new Carrera();
-            nuevaCarrera.setNombre(nombre);
+            nuevaCarrera.setNombre(nombre.toLowerCase());
             MantenimientoCarrera mantCarrera = new MantenimientoCarrera();
+            Profesor director=new Profesor();
             mantCarrera.agregarCarrera(carrera, nuevaCarrera);
         } catch (NumberFormatException e) {
             System.out.println("Formato incorrecto, intente de nuevo\n");
@@ -160,9 +160,9 @@ public class Main {
             System.out.print("Digite el nombre de la carrera a consultar:\n");
             String nombreCarrera = scanner01.nextLine();
             Carrera nuevaCarrera = new Carrera();
-            nuevaCarrera.setNombre(nombreCarrera);
+            nuevaCarrera.setNombre(nombreCarrera.toLowerCase());
             MantenimientoCarrera mantCarrera = new MantenimientoCarrera();
-            mantCarrera.consultarCarrera(carrera, nombreCarrera);
+            mantCarrera.consultarCarrera(carrera, nombreCarrera.toLowerCase());
         } catch (NumberFormatException e) {
             System.out.println("Formato incorrecto, intente de nuevo\n");
         }
@@ -176,7 +176,7 @@ public class Main {
             System.out.print("Digite el nuevo nombre:\n");
             String nuevoNombre = scanner03.nextLine();
             Carrera nuevaCarrera = new Carrera();
-            nuevaCarrera.setNombre(nuevoNombre);
+            nuevaCarrera.setNombre(nuevoNombre.toLowerCase());
             MantenimientoCarrera mantCarrera = new MantenimientoCarrera();
             mantCarrera.modificarCarrera(carrera, nombre, nuevaCarrera);
         } catch (NumberFormatException e) {
@@ -190,7 +190,7 @@ public class Main {
             System.out.print("Digite el nombre de la carrera que desea eliminar:\n");
             String nombreCarrera = scanner02.nextLine();
             Carrera nuevaCarrera = new Carrera();
-            nuevaCarrera.setNombre(nombreCarrera);
+            nuevaCarrera.setNombre(nombreCarrera.toLowerCase());
             MantenimientoCarrera mantCarrera = new MantenimientoCarrera();
             mantCarrera.eliminarCarrera(carrera, nuevaCarrera);
             scanner02.nextLine();
@@ -201,37 +201,61 @@ public class Main {
 
 //MANTENIMIENTO DE ESTUDIANTES
     public void agregarEstudiante() {
+        String cedula = "";
+        String nombre = "";
+        String carnet = "";
         Scanner scanner01 = new Scanner(System.in);
-        try {
+        boolean verificacionCed = false;
+        while (!verificacionCed) {
             System.out.println("Ingrese la cedula del estudiante a registrar:\n");
-            String cedula = scanner01.nextLine();
-            System.out.println("Digite el nombre del estudiante:\n");
-            String nombre = scanner01.nextLine();
-            LocalDate fechaNacimiento = LocalDate.now();
-            boolean verificacionFecha = false;
-            while (!verificacionFecha) {
-                System.out.print("Digite la fecha de nacimiento del estudiante (ej 1953-01-30):\n");
-                String fecha = scanner01.nextLine();
-                try {
-                    LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE);
-                    verificacionFecha = true;
-                } catch (DateTimeParseException e) {
-                    System.out.println("Fecha con mal formato, por favor digitela de nuevo\n");
-                }
+            cedula = scanner01.nextLine();
+            if (cedula != "") {
+                verificacionCed = true;
+            } else {
+                System.out.println("Cedula no puede estar vacia");
             }
-            System.out.println("Digite el numero de Carnet:\n");
-            String carnet = scanner01.nextLine();
-            Estudiante estudiante = new Estudiante();
-            estudiante.setIdentificacion(cedula);
-            estudiante.setNombre(nombre);
-            estudiante.setFechaNacimiento(fechaNacimiento);
-            estudiante.setCarnet(carnet);
-            estudiante.setCarreras(new Carrera[10]);
-            estudiante.setCursos(new Curso[10]);
-            Mantenimientos.agregarPersona(estudiantes, estudiante);
-        } catch (NumberFormatException e) {
-            System.out.println("Cedula debe ser numerica\n");
         }
+        boolean verificacionNom = false;
+        while (!verificacionNom) {
+            System.out.println("Digite el nombre del estudiante:\n");
+            nombre = scanner01.nextLine();
+            if (nombre != "") {
+                verificacionNom = true;
+            } else {
+                System.out.println("Nombre no puede estar vacio");
+            }
+        }
+        LocalDate fechaNacimiento = LocalDate.now();
+        boolean verificacionFecha = false;
+        while (!verificacionFecha) {
+            System.out.print("Digite la fecha de nacimiento del estudiante (ej 1953-01-30):\n");
+            String fecha = scanner01.nextLine();
+            try {
+                LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE);
+                verificacionFecha = true;
+            } catch (DateTimeParseException e) {
+                System.out.println("Fecha con mal formato, por favor digitela de nuevo\n");
+            }
+        }
+        boolean verificacionCarnet = false;
+        while (!verificacionCarnet) {
+            System.out.println("Digite el numero de Carnet:\n");
+            carnet = scanner01.nextLine();
+            if (carnet != "") {
+                verificacionCarnet = true;
+            } else {
+                System.out.println("Carnet puede estar vacio");
+            }
+        }
+        Estudiante estudiante = new Estudiante();
+        estudiante.setIdentificacion(cedula.toLowerCase());
+        estudiante.setNombre(nombre.toLowerCase());
+        estudiante.setFechaNacimiento(fechaNacimiento);
+        estudiante.setCarnet(carnet.toLowerCase());
+        estudiante.setCarreras(new Carrera[20]);
+        estudiante.setCursos(new Curso[20]);
+        Mantenimientos.agregarPersona(estudiantes, estudiante);
+
     }
 
     public void consultarEstudiante() {
@@ -241,7 +265,7 @@ public class Main {
             System.out.print("Digite la cedula del estudiante a consultar:\n");
             String cedula = scanner01.nextLine();
             Estudiante estudiante = new Estudiante();
-            estudiante.setIdentificacion(cedula);
+            estudiante.setIdentificacion(cedula.toLowerCase());
             Mantenimientos.consultarPersona(estudiantes, cedula);
         } catch (NumberFormatException e) {
             System.out.println("Formato incorrecto, intente de nuevo\n");
@@ -270,9 +294,9 @@ public class Main {
             }
             System.out.println("Digite el numero de Carnet:\n");
             String carnet = scanner01.nextLine();
-            estudiante.setIdentificacion(cedEstudiante);
-            estudiante.setNombre(nombre);
-            estudiante.setCarnet(carnet);
+            estudiante.setIdentificacion(cedEstudiante.toLowerCase());
+            estudiante.setNombre(nombre.toLowerCase());
+            estudiante.setCarnet(carnet.toLowerCase());
             estudiante.setFechaNacimiento(fechaNacimiento);
             Mantenimientos.modificarPersona(estudiantes, cedEstudiante, estudiante);
         } catch (NumberFormatException e) {
@@ -321,7 +345,7 @@ public class Main {
             profesor.setNombre(nombre);
             profesor.setFechaNacimiento(fechaNacimiento);
             profesor.setIdEmpleado(idEmpleado);
-            profesor.setCarreras(new Carrera[10]);
+            profesor.setCarreras(new Carrera[20]);
             Mantenimientos.agregarPersona(profesores, profesor);
         } catch (NumberFormatException e) {
             System.out.println("Cedula debe ser numerica\n");
@@ -421,8 +445,7 @@ public class Main {
         if(imprimeCarreras()){
         System.out.println("No existen carreras registradas");
         }
-        while (!verificacion) {
-            
+        while (!verificacion) {            
                 System.out.println("De la lista anterior digite el nombre de la carrera (Enter para abortar)\n");
                 nombre = scanner01.nextLine();
                 if (nombre.equals("")) {
@@ -510,6 +533,80 @@ public class Main {
             }
         return dato;
     }
+    
+        //ASIGNAR O QUITAR CARRERAS A UN PROFESOR
+    private Profesor buscaProfesor() {
+        String identificacion = "";
+        Profesor profesor=null;
+        Scanner scanner01 = new Scanner(System.in);
+        boolean verificacion = false;
+        imprimeProfesores();
+        while (!verificacion) {
+            System.out.print("De la lista anterior digite el id del profesor (Enter para abortar)\n");
+            identificacion = scanner01.nextLine();
+            if (identificacion.equals("")) {
+                return null;
+            }
+            profesor=(Profesor)Mantenimientos.buscarDato(profesores, identificacion);
+            if (profesor==null) {
+                System.out.print("El id no existe en la lista, por favor ingrese uno valido\n");
+            } else {
+                verificacion = true;
+            }
+        }
+        return profesor;
+    }   
+       
+    public void asignarQuitarCarreraProfesor(boolean quitar) {
+        try {
+            Carrera datoCarrera = buscaCarrera();
+            if (datoCarrera == null)
+            {
+                // El usuario aborto la asignacion
+                return;
+            }
+            Profesor profesor = buscaProfesor();
+            if (profesor == null) {
+                // El usuario aborto la asignacion
+                return;
+            }
+            if (quitar) {
+                MantenimientoCarrera.eliminarCarrera(profesor.getCarreras(), datoCarrera);
+            } else {
+                MantenimientoCarrera.agregarCarrera(profesor.getCarreras(),datoCarrera);
+            }
+            System.out.println("Operacion realizada satisfactoriamente");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void asignarQuitarProfesorDirectorCarrera(boolean quitar){
+        try{
+            Carrera datoCarrera=buscaCarrera();
+            if (datoCarrera == null)
+            {
+                return;
+            }
+            Profesor director = buscaProfesor();
+            if(director==null){
+                    return; 
+            }
+            if(quitar){
+                    datoCarrera.setDirector(null);
+            }else {                
+                datoCarrera.setDirector(director);
+                datoCarrera.toString();
+            }
+            
+            System.out.println("Operacion realizada satisfactoriamente");
+            
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+    }
+    
+    
    //GENERAR LISTA DE ESTUDIANTES MATRICULADOS A UN CURSO
     public void generarListaEstudiantesCurso() {
 
@@ -566,4 +663,13 @@ public class Main {
         return vacio;
     }
     
+     //Imprimir Profesores
+     private void imprimeProfesores(){
+           System.out.println("----- LISTA PROFESORES ------");
+           for(int i=0;i< profesores.length;i++){
+               if(profesores[i] !=null){
+                   System.out.println(profesores[i]);
+               }
+           }
+     }
 }

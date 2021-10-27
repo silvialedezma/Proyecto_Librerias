@@ -11,14 +11,17 @@ import com.ucreativa.universidad.Curso;
 public class Mantenimientos {
 
     public static void agregarPersona(Persona[] persona, Persona registro) {
+        boolean lleno = true;
         for (int i = 0; i < persona.length; i++) {
             if (persona[i] == null) {
                 persona[i] = registro;
+                lleno=false;
                 System.out.println("Registro agregado exitosamente: " + registro);
                 break;
-            } else {
-                System.out.println("Error: No se puede ingresar mas registros");
             }
+        }
+        if (lleno) {
+            System.out.println("Error: No se puede ingresar mas registros");
         }
     }
 

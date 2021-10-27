@@ -17,14 +17,17 @@ public class MantenimientoCursos {
 
     //Agregar un curso
     public static void agregarCurso(Curso[] cursos, Curso registro) {
+        boolean lleno = true;
         for (int i = 0; i < cursos.length; i++) {
             if (cursos[i] == null) {
                 cursos[i] = registro;
+                lleno=false;
                 System.out.println("Registro agregado exitosamente:" + registro);
                 break;
-            } else {
-                System.out.println("Error:No se puede ingresar mas cursos");
             }
+        }
+        if (lleno) {
+            System.out.println("Error:No se puede ingresar mas cursos");
         }
     }
 
@@ -65,11 +68,12 @@ public class MantenimientoCursos {
 
     public static Curso consultarCurso(Curso[] cursos, String nombreActual) {
         for (int i = 0; i < cursos.length; i++) {
-            if (cursos[i] != null && (cursos[i].getNombre().equals(nombreActual))) {
+            if (cursos[i] != null && (cursos[i].getNombre().toLowerCase().equals(nombreActual.toLowerCase()))) {
                 System.out.println("Registro encontrado exitosamente: " + cursos[i]);
                 return cursos[i];
             }
         }
+        System.out.println("Error: El registro no existe: " + nombreActual);
         return null;
     }
 

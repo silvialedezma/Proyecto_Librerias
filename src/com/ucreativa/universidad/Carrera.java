@@ -46,16 +46,12 @@ public class Carrera {
         this.director = director;
     }
 
+    @Override
     public String toString() {
-        if (director != null)
-        {
-            return "Carrera{"
-                    + "nombre='" + nombre + '\''
-                    + ", director='" + director + '\''
-                    + '}';
-        }
         return "Carrera{"
-                    + "nombre='" + nombre + '\''
-                    + '}';
+                + "nombre='" + nombre + '\''
+                + ", director='" + director + '\''
+                + '}';
+
     }
 }

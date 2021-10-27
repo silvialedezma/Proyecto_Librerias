@@ -5,7 +5,9 @@
  */
 package com.ucreativa.Mantenimientos;
 
+import com.ucreativa.personas.Profesor;
 import com.ucreativa.universidad.Carrera;
+
 
 /**
  *
@@ -15,14 +17,17 @@ public class MantenimientoCarrera {
 
     //Agregar carrera
     public static void agregarCarrera(Carrera[] carreras, Carrera registro) {
+        boolean lleno=true;
         for (int i = 0; i < carreras.length; i++) {
-            if (carreras[i] == null) {
+            if (carreras[i]==null) {
                 carreras[i] = registro;
+                lleno=false;
                 System.out.println("Registro agregado correctamente: " + registro);
                 break;
-            } else {
-                System.out.println("Error:No se puede ingresar mas carreras");
-            }
+            }    
+        }
+        if (lleno){
+            System.out.println("No se pueden agregar mas carreras");
         }
     }
 
@@ -88,5 +93,4 @@ public class MantenimientoCarrera {
         }
         return null;
     }
-
 }

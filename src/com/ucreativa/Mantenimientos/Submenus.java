@@ -78,7 +78,9 @@ public class Submenus {
             System.out.println("2-Modificar");
             System.out.println("3-Eliminar");
             System.out.println("4-Consultar");
-            System.out.println("5-Salir");
+            System.out.println("5-Asignar director a Carrera");
+            System.out.println("6-Eliminar director de Carrera");
+            System.out.println("7-Salir");
             System.out.println("----------------------------------------------");
             System.out.println("Opcion seleccionada:");
             String operacion = scanner01.nextLine();
@@ -102,6 +104,12 @@ public class Submenus {
                     inicio.consultarCarrera();
                     break;
                 case 5:
+                    inicio.asignarQuitarProfesorDirectorCarrera(false);
+                    break;
+                case 6:
+                    inicio.asignarQuitarProfesorDirectorCarrera(true);
+                    break;
+                case 7:
                     System.out.println("Saliendo del sistema");
                     b = false;
                     break;
@@ -110,6 +118,8 @@ public class Submenus {
             }
         }
     }
+
+
 
     public void subMenuEstudiante() {
         boolean b = true;
@@ -178,7 +188,9 @@ public class Submenus {
             System.out.println("2-Modificar");
             System.out.println("3-Eliminar");
             System.out.println("4-Consultar");
-            System.out.println("5-Salir");
+            System.out.println("5-Asignar Carrera");
+            System.out.println("6-Eliminar Carrera");
+            System.out.println("7-Salir");
             System.out.println("----------------------------------------------");
             System.out.println("Opcion seleccionada:");
             String operacion = scanner01.nextLine();
@@ -202,6 +214,12 @@ public class Submenus {
                     inicio.consultarProfesor();
                     break;
                 case 5:
+                    inicio.asignarQuitarCarreraProfesor(false);
+                    break;
+                case 6:
+                    inicio.asignarQuitarCarreraProfesor(true);
+                    break;
+                case 7:
                     System.out.println("Saliendo del sistema");
                     b = false;
                     break;
