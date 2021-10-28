@@ -18,6 +18,7 @@ public class Profesor extends Persona {
     private Carrera[] carreras = null;  //crear clase carrera
 
     public Profesor() {
+        carreras=new Carrera[20];
     }
 
     /**

@@ -21,6 +21,8 @@ public class Estudiante extends Persona {
     
 
     public Estudiante() {
+        carrera = new Carrera[20];
+        curso = new Curso[20];
     }
 
     /**
