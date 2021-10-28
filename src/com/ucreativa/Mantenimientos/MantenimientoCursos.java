@@ -38,7 +38,7 @@ public class MantenimientoCursos {
             if (cursos[i] != null && cursos[i].getNombre().equals(registro.getNombre())) {
                 recordfound = true;
                 cursos[i] = null;
-                System.out.println("Registro eliminado exitosamente:" + registro );
+                System.out.println("Registro eliminado exitosamente:" + registro);
                 break;
             } else {
                 recordfound = false;
